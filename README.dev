@@ -6,3 +6,13 @@ pip freeze > requirements.txt
 
 ## autoreloading flask server
 flask --app app.py --debug run
+
+## generators in python
+with app.test_client() as client:
+    yield client
+
+## pytest gave E   ModuleNotFoundError: No module named 'app'
+initialize empty file __init__.py in tests/ folder
+
+## How to run tests
+pytest
