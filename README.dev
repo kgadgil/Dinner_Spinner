@@ -1,0 +1,8 @@
+README.dev
+
+python3 -m venv .venv
+pip3 install flask
+pip freeze > requirements.txt
+
+## autoreloading flask server
+flask --app app.py --debug run

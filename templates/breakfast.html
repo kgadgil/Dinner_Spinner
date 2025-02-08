@@ -1,0 +1,11 @@
+<!doctype html>
+<title>Hello from Flask</title>
+{% if data.keys() %}
+  <table>
+  {% for key in data.keys() %}
+     <tr><td>{{ key }}</td><td>{{ data[key] }}</td></tr>
+  {% endfor %}
+</table>
+{% else %}
+  <h1>Hello, World!</h1>
+{% endif %}
