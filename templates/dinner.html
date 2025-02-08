@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<title> Dinner Menu </title>
+<body>
+    {% for item, details in data.items() %}
+    <div class='item'>
+        <!-- Dinner item -->
+        <h2>{{ item }}</h2>
+
+        <!-- Ingredients -->
+        <h3>Ingredients</h3>
+        <ul>
+            {% for ingredient in details[0] %}
+            <li>
+                {{ ingredient }}
+            </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Instructions -->
+        <h3>Instructions</h3>
+        <ul>
+            {% for instruction in details[1] %}
+            <li>
+                {{ instruction }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</body>

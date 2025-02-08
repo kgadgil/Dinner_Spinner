@@ -23,5 +23,9 @@ def breakfast():
 
 @app.route("/dinner")
 def dinner():
-    dine = pd.read_csv("data/dinner.csv")
-    return dine.to_dict()
+    data = read_json("data/dinner.csv")
+    return render_template("dinner.html", data=data)
+
+if __name__ == "__main__":
+    app.debug = True
+    app.run()
