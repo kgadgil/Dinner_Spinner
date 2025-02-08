@@ -24,6 +24,8 @@ def breakfast():
 @app.route("/dinner")
 def dinner():
     data = read_json("data/dinner.csv")
+    choice = random.choice(list(data.keys()))
+    flash(f"You should have {choice} for dinner")
     return render_template("dinner.html", data=data)
 
 if __name__ == "__main__":

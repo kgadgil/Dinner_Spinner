@@ -4,14 +4,13 @@ from app import app, read_json
 @pytest.fixture
 def client():
     """Create a test client for the Flask app with session support"""
-    """session thingy doesn't work"""
+    """session thingy for flashes doesn't work"""
     app.config['TESTING'] = True
     app.config['SECRET_KEY'] = 'test_secret_key'  # Required for session flash messages
     with app.test_client() as client:
         # with client.session_transaction() as session:
         #     session.modified = True  # Ensure session modifications are saved
         yield client
-
 
 def test_read_json():
     """Test if JSON data is loaded correctly from CSV"""
