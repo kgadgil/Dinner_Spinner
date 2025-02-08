@@ -1,11 +1,54 @@
-<!doctype html>
-<title>Hello from Flask</title>
-{% if data.keys() %}
-  <table>
-  {% for key in data.keys() %}
-     <tr><td>{{ key }}</td><td>{{ data[key] }}</td></tr>
-  {% endfor %}
-</table>
-{% else %}
-  <h1>Hello, World!</h1>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+    <title>Breakfast Menu</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Breakfast Menu</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Ingredients</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item, ingredients in data.items() %}
+            <tr>
+                <td>{{ item }}</td>
+                <td>
+                    {% for ingredient in ingredients %}
+                        {{ ingredient }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

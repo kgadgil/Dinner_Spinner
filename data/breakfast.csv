@@ -1,6 +1,7 @@
-oats
-toast
-avocado toast
-upma
-sheera
-bananas
+{
+"oats": ["oats","water"],
+"toast": ["bread", "butter", "toaster"],
+"avocado toast": ["avocados","bread","salt"],
+"upma": ["rava","curry leaves","jeera","salt","water"],
+"sheera": ["rava", "sugar", "cardamom powder","nutmeg powder","saffron"]
+}
