@@ -16,3 +16,45 @@ initialize empty file __init__.py in tests/ folder
 
 ## How to run tests
 pytest
+
+## Kubernetes deploy
+Create a docker container
+docker build -t dinner-spinner .
+Run docker container
+docker run -p 5000:5000 dinner-spinner 
+http://localhost:5000/breakfast
+
+Made a change to app.py to bind flask to 0.0.0.0 to make it accessible externally
+app.run(host="0.0.0.0", port=5000, debug=True)
+
+minikube tries to look for docker image on dockerhub. 
+disable that behaviour by adding following line to deployment.yaml
+imagePullPolicy: Never
+
+minikube start
+kubectl get nodes
+eval $(minikube docker-env)
+docker build -t dinner-spinner .
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl get pods
+minikube service dinner-spinner-service --url
+http://192.168.49.2:31921/breakfast
+
+## Challenges faced
+$ minikube service dinner-spinner-service --url
+http://192.168.49.2:31188
+
+❌  Exiting due to SVC_UNREACHABLE: service not available: no running pod for service dinner-spinner-service found
+
+Debug and troubleshoot
+The issue you are facing is ImagePullBackOff, which means Kubernetes is unable to pull your Docker image. Since you built the image locally, Minikube is not able to find it
+
+$ kubectl get pods
+NAME                             READY   STATUS             RESTARTS   AGE
+dinner-spinner-c769648cb-mq46m   0/1     ImagePullBackOff   0          2m40s
+dinner-spinner-c769648cb-t4lwp   0/1     ImagePullBackOff   0          2m40s
+
+You can load the docker image explicitly, if Minikube's Docker daemon eval thing didn't work
+minikube image load dinner-spinner
+But i didn't have to do that. instead setup behaviour to pull docker container locally
