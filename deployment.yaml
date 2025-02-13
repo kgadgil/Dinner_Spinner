@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dinner-spinner
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dinner-spinner
+  template:
+    metadata:
+      labels:
+        app: dinner-spinner
+    spec:
+      containers:
+      - name: dinner-spinner
+        image: dinner-spinner:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
